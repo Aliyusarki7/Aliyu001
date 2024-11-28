@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: task-master
+    env: node
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: EMAIL_USER
+        sync: false
+      - key: EMAIL_PASS
+        sync: false
+      - key: FRONTEND_URL
+        value: https://task-master-u3ss.onrender.com
+    healthCheckPath: /health
+    autoDeploy: true
+    plan: free
+    domains:
+      - task-master-u3ss.onrender.com
+    disk:
+      name: task-master-data
+      mountPath: /data
+      sizeGB: 1
